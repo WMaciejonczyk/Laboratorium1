@@ -30,8 +30,6 @@ public class Ex6 {
 
         if (miesiac == 2) {
             dopuszczalnyDzien = 29;
-        } else {
-            dopuszczalnyDzien = 31;
         }
 
         if ((dzien < 1) || (dzien >= dopuszczalnyDzien)) {
