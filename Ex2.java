@@ -9,6 +9,7 @@ public class Ex2 {
 
         if (reference.isEmpty()) {
             throw new IllegalArgumentException("Łańcuch referencyjny nie może być pusty.");
+        }    
 
         while (true) {
             int wrong = 0;
