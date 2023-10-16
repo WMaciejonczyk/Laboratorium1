@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Zadanie 6
+ */
 public class Ex6 {
+    /**
+     * Program tworzący datę
+     * @param args dzień, miesiąc i rok
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -17,6 +24,14 @@ public class Ex6 {
         }
     }
 
+    /**
+     * Metoda odpowiedzialna za analizę wprowadzonej daty
+     * @param dzien dzień
+     * @param miesiac miesiąc
+     * @param rok rok
+     * @return sformatowana data
+     * @throws IllegalArgumentException gdy wprowadzono niepoprawny miesiąc lub dzień
+     */
     public static String data(int dzien, int miesiac, int rok) {
         int dopuszczalnyDzien = 31;
 
