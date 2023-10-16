@@ -5,7 +5,7 @@ import java.util.Scanner;
  */
 public class Ex5 {
     /**
-     * Program obliczający współczynniki prostej
+     * Program obliczający równanie prostej
      * @param args współrzędne dwóch punktów
      */
     public static void main(String[] args) {
