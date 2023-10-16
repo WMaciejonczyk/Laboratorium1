@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * Zadanie 2.
+ */
 public class Ex2 {
+    /**
+     * Program sprawdzający zgodność między łańcuchem referencyjnym a łańcuchem do porównania
+     * @param args łańcuch referencyjny oraz łańcuch do porównania
+     * @throws IllegalArgumentException gdy łańcuch referencyjny lub łańcuch do porównania jest pusty
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
