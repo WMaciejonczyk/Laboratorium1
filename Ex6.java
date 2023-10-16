@@ -32,7 +32,7 @@ public class Ex6 {
             dopuszczalnyDzien = 29;
         }
 
-        if ((dzien < 1) || (dzien >= dopuszczalnyDzien)) {
+        if ((dzien < 1) || (dzien > dopuszczalnyDzien)) {
             throw new IllegalArgumentException("Podano nieprawidłowy dzień.");
         }
 
