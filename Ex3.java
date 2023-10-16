@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * Zadanie 3.
+ */
 public class Ex3 {
+    /**
+     * Program do konwersji szestnastkowego kodu RGB na dziesiętny
+     * @param args kod szestnastkowy RGB
+     * @throws IllegalArgumentException gdy kod szestnastkowy podany przez użytkownika nie składa się z 6 znaków
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
