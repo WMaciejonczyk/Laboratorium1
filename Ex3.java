@@ -9,6 +9,10 @@ public class Ex3 {
 
         scanner.close();
 
+        if (k.length() != 6) {
+            throw new IllegalArgumentException("Podany kod powinien składać się z sześciu znaków.");
+        }
+
         String s1 = k.substring(0, 2);
         String s2 = k.substring(2, 4);
         String s3 = k.substring(4, 6);
