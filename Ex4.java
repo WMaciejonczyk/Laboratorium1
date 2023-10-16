@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * Zadanie 4.
+ */
 public class Ex4 {
+    /**
+     * Program tworzący tabliczkę mnożenia do pewnego zakresu
+     * @param args zakres tabliczki mnożenia
+     * @throws IllegalArgumentException gdy zostanie podana liczba spoza zakresu 1 do 9            
+     */
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
