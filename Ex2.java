@@ -15,6 +15,10 @@ public class Ex2 {
             System.out.print("Podaj łańcuch do porównania: ");
             String compare = scanner.nextLine().toLowerCase();
 
+            if (compare.isEmpty()) {
+                throw new IllegalArgumentException("Łańcuch do porównania nie może być pusty.");
+            }
+
             if (compare.equals("stop")) {
                 break;
             }
