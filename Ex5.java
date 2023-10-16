@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Zadanie 5.
+ */
 public class Ex5 {
+    /**
+     * Program obliczający współczynniki prostej
+     * @param args współrzędne dwóch punktów
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -21,6 +28,15 @@ public class Ex5 {
         }
     }
 
+    /**
+     * Funkcja obliczająca współczynnik kierunkowy i wyraz wolny równania prostej
+     * @param pierwszyPunktX współrzędna x pierwszego punktu
+     * @param pierwszyPunktY współrzędna y pierwszego punktu
+     * @param drugiPunktX współrzędna x drugiego punktu
+     * @param drugiPunktY współrzędna y drugiego punktu
+     * @return współczynniki prostej
+     * @throws IllegalArgumentException gdy punkty są identyczne
+     */
     public static double[] wspolczynniki(double pierwszyPunktX, double pierwszyPunktY, double drugiPunktX, double drugiPunktY) {
         if ((drugiPunktX == pierwszyPunktX) && (drugiPunktY == pierwszyPunktY)){
             throw new IllegalArgumentException("Współrzędne punktów nie mogą być takie same.");
