@@ -7,6 +7,9 @@ public class Ex2 {
         System.out.print("Podaj łańcuch referencyjny: ");
         String reference = scanner.nextLine().toLowerCase();
 
+        if (reference.isEmpty()) {
+            throw new IllegalArgumentException("Łańcuch referencyjny nie może być pusty.");
+
         while (true) {
             int wrong = 0;
             System.out.print("Podaj łańcuch do porównania: ");
