@@ -10,7 +10,7 @@ public class Ex4 {
         scanner.close();
 
         if ((n > 9) || (n < 1)) {
-            System.out.print("Podano liczbę spoza dopuszczalnego przedziału.");
+            throw new IllegalArgumentException("Podano liczbę spoza dopuszczalnego przedziału.");
         } else {
             int[][] tabA = new int[n][n];
             for (int i = 0; i < n; i++) {
