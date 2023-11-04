@@ -2,10 +2,7 @@
  * Klasa implementująca interfejs Produkt, tworząca i operująca na obiektach reprezentujących rezystory. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
-public class Rezystor implements Produkt {
-    private int ilosc;
-    private String nazwa;
-    private double cena;
+public class Rezystor extends AbstractProdukt { {
     private String[] kodPaskowy;
 
     /**
@@ -17,20 +14,12 @@ public class Rezystor implements Produkt {
      * @throws IllegalArgumentException gdy ilosc < 0 lub cena <= 0 lub kodPaskowy nie jest 4-elementowy
      */
     public Rezystor(int ilosc, String nazwa, double cena, String[] kodPaskowy) {
-        if (ilosc < 0) {
-            throw new IllegalArgumentException("Podano niepoprawną ilość");
-        }
-        if (cena <= 0) {
-            throw new IllegalArgumentException("Podano niepoprawną cenę");
-        }
-        if (kodPaskowy.length != 4) {
-            throw new IllegalArgumentException("Podano błędny kod paskowy");
-        }
-        this.ilosc = ilosc;
-        this.nazwa = nazwa;
-        this.cena = cena;
-        this.kodPaskowy = kodPaskowy;
-    }
+       super(nazwa, cena, ilosc);
+       if (kodPaskowy.length != 4) {
+           throw new IllegalArgumentException("Podano błędny kod paskowy");
+       }
+       this.kodPaskowy = kodPaskowy;
+   }
 
     /**
      * Metoda pobierająca nazwę rezystora (implementacja interfejsu Produkt)
