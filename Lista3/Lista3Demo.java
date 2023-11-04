@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 /**
- * Program sprawdzający działanie klas implementujących interfejs Produkt <p>
+ * Program sprawdzający działanie klas implementujących interfejs Produkt/klasę abstrakcyjną AbstractProdukt <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Lista3Demo {
