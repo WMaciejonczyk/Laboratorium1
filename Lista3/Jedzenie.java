@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 /**
- * Klasa implementująca interfejs Produkt, tworząca i operująca na obiektach reprezentujących produkty spożywcze. <p>
+ * Klasa implementująca klasę abstrakcyjną AbstractProdukt, tworząca i operująca na obiektach reprezentujących produkty spożywcze. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Jedzenie extends AbstractProdukt {
@@ -13,7 +13,6 @@ public class Jedzenie extends AbstractProdukt {
      * @param nazwa nazwa danego jedzenia
      * @param cena cena danego jedzenia
      * @param dataWaznosci data ważności danego produktu
-     * @throws IllegalArgumentException gdy ilosc < 0 lub cena <= 0
      */
     public Jedzenie(int ilosc, String nazwa, double cena, LocalDate dataWaznosci) {
         super(nazwa, cena, ilosc);
@@ -21,7 +20,7 @@ public class Jedzenie extends AbstractProdukt {
     }
 
     /**
-     * Metoda pobierająca nazwę jedzenia (implementacja interfejsu Produkt)
+     * Metoda pobierająca nazwę jedzenia (implementacja klasy AbstractProdukt)
      * @return nazwa jedzenia
      */
     @Override
@@ -38,7 +37,7 @@ public class Jedzenie extends AbstractProdukt {
     }
 
     /**
-     * Metoda pobierająca cenę jedzenia (implementacja interfejsu Produkt)
+     * Metoda pobierająca cenę jedzenia (implementacja klasy AbstractProdukt)
      * @return cena jedzenia
      */
     @Override
@@ -61,7 +60,7 @@ public class Jedzenie extends AbstractProdukt {
     }
 
     /**
-     * Metoda pobierająca ilość danego jedzenia (implementacja interfejsu Produkt)
+     * Metoda pobierająca ilość danego jedzenia (implementacja klasy AbstractProdukt)
      * @return ilość jedzenia
      */
     @Override
