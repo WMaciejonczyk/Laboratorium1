@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 /**
- * Klasa tworząca i operująca na liście obiektów, które implementują interfejs Produkt. <p>
+ * Klasa tworząca i operująca na liście obiektów, które implementują klasę abstrakcyjną AbstractProdukt. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Magazyn {
