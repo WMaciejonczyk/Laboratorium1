@@ -1,5 +1,5 @@
 /**
- * Klasa implementująca interfejs Produkt, tworząca i operująca na obiektach reprezentujących rezystory. <p>
+ * Klasa implementująca klasę abstrakcyjną AbstractProdukt, tworząca i operująca na obiektach reprezentujących rezystory. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Rezystor extends AbstractProdukt { {
@@ -11,7 +11,7 @@ public class Rezystor extends AbstractProdukt { {
      * @param nazwa nazwa danego rezystora
      * @param cena cena danego rezystora
      * @param kodPaskowy kod paskowy zawierający informacje o właściwościach rezystora
-     * @throws IllegalArgumentException gdy ilosc < 0 lub cena <= 0 lub kodPaskowy nie jest 4-elementowy
+     * @throws IllegalArgumentException gdy kodPaskowy nie jest 4-elementowy
      */
     public Rezystor(int ilosc, String nazwa, double cena, String[] kodPaskowy) {
        super(nazwa, cena, ilosc);
@@ -22,7 +22,7 @@ public class Rezystor extends AbstractProdukt { {
    }
 
     /**
-     * Metoda pobierająca nazwę rezystora (implementacja interfejsu Produkt)
+     * Metoda pobierająca nazwę rezystora (implementacja klasy AbstractProdukt)
      * @return nazwa rezystora
      */
     @Override
@@ -39,7 +39,7 @@ public class Rezystor extends AbstractProdukt { {
     }
 
     /**
-     * Metoda pobierająca cenę rezystora (implementacja interfejsu Produkt)
+     * Metoda pobierająca cenę rezystora (implementacja klasy AbstractProdukt)
      * @return cena rezystora
      */
     @Override
@@ -62,7 +62,7 @@ public class Rezystor extends AbstractProdukt { {
     }
 
     /**
-     * Metoda zwracająca liczbę rezystorów (implementacja interfejsu Produkt)
+     * Metoda zwracająca liczbę rezystorów (implementacja klasy AbstractProdukt)
      * @return liczba rezystorów
      */
     @Override
