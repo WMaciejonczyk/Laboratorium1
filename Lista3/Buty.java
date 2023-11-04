@@ -2,7 +2,7 @@
  * Klasa implementująca klasę abstrakcyjną AbstractProdukt, tworząca i operująca na obiektach reprezentujących obuwie marki Adidas. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
-public class AbstractButy extends AbstractProdukt {
+public class Buty extends AbstractProdukt {
     private String plec;
     private double rozmiarUK;
 
@@ -15,7 +15,7 @@ public class AbstractButy extends AbstractProdukt {
      * @param rozmiarUK rozmiar buta w standardzie UK
      * @throws IllegalArgumentException gdy rozmiarUK > 14 lub < 3.5 lub nie jest podzielny przez 0.5 lub podano złą płeć
      */
-    public AbstractButy(int ilosc, String nazwa, double cena, String plec, double rozmiarUK) {
+    public Buty(int ilosc, String nazwa, double cena, String plec, double rozmiarUK) {
         super(nazwa, cena, ilosc);
         if (rozmiarUK < 3.5 || rozmiarUK > 14 && rozmiarUK % 0.5 != 0) {
             throw new IllegalArgumentException("Podano niepoprawny rozmiar");
