@@ -2,10 +2,9 @@
  * Klasa implementująca interfejs Produkt, tworząca i operująca na obiektach reprezentujących obuwie marki Adidas. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
-public class Buty implements Produkt {
-    private int ilosc;
-    private String nazwa, plec;
-    private double cena, rozmiarUK;
+public class AbstractButy extends AbstractProdukt {
+    private String plec;
+    private double rozmiarUK;
 
     /**
      * Konstruktor składający się z pięciu parametrów.
@@ -17,22 +16,14 @@ public class Buty implements Produkt {
      * @throws IllegalArgumentException gdy rozmiarUK > 14 lub < 3.5 lub nie jest podzielny przez 0.5 lub ilosc < 0 lub
      * cena <= 0 lub podano złą płeć
      */
-    public Buty(int ilosc, String nazwa, double cena, String plec, double rozmiarUK) {
+    public AbstractButy(int ilosc, String nazwa, double cena, String plec, double rozmiarUK) {
+        super(nazwa, cena, ilosc);
         if (rozmiarUK < 3.5 || rozmiarUK > 14 && rozmiarUK % 0.5 != 0) {
             throw new IllegalArgumentException("Podano niepoprawny rozmiar");
-        }
-        if (ilosc < 0) {
-            throw new IllegalArgumentException("Podano niepoprawną ilość");
-        }
-        if (cena <= 0) {
-            throw new IllegalArgumentException("Podano niepoprawną cenę");
         }
         if (!plec.equalsIgnoreCase("M") && !plec.equalsIgnoreCase("K")) {
             throw new IllegalArgumentException("Podano niepoprawną płeć");
         }
-        this.ilosc = ilosc;
-        this.nazwa = nazwa;
-        this.cena = cena;
         this.plec = plec;
         this.rozmiarUK = rozmiarUK;
     }
