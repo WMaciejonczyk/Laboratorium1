@@ -17,3 +17,17 @@
   ComplexNumber.java - klasa podrzędna klasy Vector2D; pozwala wykonywać podstawowe działania matematyczne na wektorach w przestrzeni zespolonej
 
   Lista2Demo.java - program pozwalający na analizę i testy związane z klasami Vector2D oraz ComplexNumber
+## Laboratorium 3
+  Produkt.java - interfejs reprezentujący podstawowe własności produktów konsumenckich
+
+  AbstractProdukt.java - klasa abstrakcyjna reprezentująca podstawowe własności produktów konsumenckich
+
+  Buty.java - program implementujący interfejs Produkt/klasę abstrakcyjną AbstractProdukt, tworzący i operujący na obiektach reprezentujących obuwie marki Adidas
+
+  Jedzenie.java - program implementujący interfejs Produkt/klasę abstrakcyjną AbstractProdukt, tworzący i operujący na obiektach reprezentujących produkty spożywcze
+
+  Rezystor.java - program implementujący interfejs Produkt/klasę abstrakcyjną AbstractProdukt, tworzący i operujący na obiektach reprezentujących rezystory
+
+  Magazyn.java - program tworzący i operujący na liście obiektów, które implementują interfejs Produkt/klasę abstrakcyjną AbstractProdukt
+
+  Lista3Demo.java - Program sprawdzający działanie klas implementujących interfejs Produkt/klasę abstrakcyjną AbstractProdukt
