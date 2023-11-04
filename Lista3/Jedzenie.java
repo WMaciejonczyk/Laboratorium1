@@ -4,13 +4,7 @@ import java.time.LocalDate;
  * Klasa implementująca interfejs Produkt, tworząca i operująca na obiektach reprezentujących produkty spożywcze. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
-public class Jedzenie implements Produkt {
-    private int ilosc;
-
-    private String nazwa;
-
-    private double cena;
-
+public class Jedzenie extends AbstractProdukt {
     private LocalDate dataWaznosci;
 
     /**
@@ -21,16 +15,8 @@ public class Jedzenie implements Produkt {
      * @param dataWaznosci data ważności danego produktu
      * @throws IllegalArgumentException gdy ilosc < 0 lub cena <= 0
      */
-    public Jedzenie (int ilosc, String nazwa, double cena, LocalDate dataWaznosci) {
-        if (ilosc < 0) {
-            throw new IllegalArgumentException("Podano niepoprawną ilość");
-        }
-        if (cena <= 0) {
-            throw new IllegalArgumentException("Podano niepoprawną cenę");
-        }
-        this.ilosc = ilosc;
-        this.nazwa = nazwa;
-        this.cena = cena;
+    public Jedzenie(int ilosc, String nazwa, double cena, LocalDate dataWaznosci) {
+        super(nazwa, cena, ilosc);
         this.dataWaznosci = dataWaznosci;
     }
 
