@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Magazyn {
-    private ArrayList<Produkt> produkty = new ArrayList<>();
+    private ArrayList<AbstractProdukt> produkty = new ArrayList<>();
 
     /**
      * Konstruktor domyślny klasy Magazyn
@@ -15,7 +15,7 @@ public class Magazyn {
      * Metoda ustawiająca nową listę produktów
      * @param produkty nowa lista produktów
      */
-    public void setProdukty(ArrayList<Produkt> produkty) {
+    public void setProdukty(ArrayList<AbstractProdukt> produkty) {
         this.produkty = produkty;
     }
 
@@ -23,7 +23,7 @@ public class Magazyn {
      * Metoda dodająca do listy dany produkt
      * @param p produkt
      */
-    public void dodajProdukt(Produkt p) {
+    public void dodajProdukt(AbstractProdukt p) {
         produkty.add(p);
     }
 
@@ -31,7 +31,7 @@ public class Magazyn {
      * Metoda usuwająca z listy dany produkt
      * @param p produkt
      */
-    public void usunProdukt(Produkt p) {
+    public void usunProdukt(AbstractProdukt p) {
         produkty.remove(p);
     }
 
