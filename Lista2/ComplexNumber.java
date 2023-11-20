@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Klasa podrzędna tworząca i operująca na obiektach reprezentujących wektory zespolone na płaszczyźnie. <p>
  * Autor: Wojciech Maciejończyk 268337
@@ -12,6 +14,60 @@ public class ComplexNumber extends Vector2D {
         super(a, b);
     }
 
+    /**
+     * Metoda umożliwiająca pobranie liczby zespolonej od użytkownika w postaci x+iy, x+i*y, x-iy, x-i*y, x + i y,
+     * x + i + y, x - i y, x - i * y, r*exp*(i*phi), r * exp * (i * phi), r*exp(iphi), rexp(iphi).
+     * @return liczba zespolona podana przez użytkownika
+     * @throws InvalidInputException gdy wprowadzone przez użytkownika dane nie są reprezentacją liczby zespolonej
+     */
+    public static ComplexNumber Input () {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine().toLowerCase();
+        sc.close();
+        double rzecz;
+        double uroj;
+        input = input.replaceAll(" ", "").replaceAll("i", "").replaceAll("j", "").replaceAll("\\)", "").replaceAll("\\*", "");
+        // wszelkie znaki, które nie są szukanymi liczbami x, y (lub r, phi), są usuwane poza znakami dodawania, odejmowania
+        // oraz nawias ) dla formy r*exp*(i*phi), gdzie nawias ( stanowi miejsce splitu stringa
+        if (input.contains("exp")) { // formy typu r*exp*(i*phi)
+            input = input.replaceAll("exp", "");
+            String[] substring = input.split("\\(");
+            if (substring.length != 2) {
+                throw new InvalidInputException("Nie udało się podzielić danych wejściowych na dwie liczby.");
+            }
+            else {
+                double modul = Double.parseDouble(substring[0]);
+                double argument = Double.parseDouble(substring[1]);
+                rzecz = modul * Math.cos(argument);
+                uroj = modul * Math.sin(argument);
+            }
+        }
+        else if (input.contains("+")) { // formy x+y
+            String[] substring = input.split("\\+");
+            if (substring.length != 2) {
+                throw new InvalidInputException("Nie udało się podzielić danych wejściowych na dwie liczby.");
+            }
+            else {
+                rzecz = Double.parseDouble(substring[0]);
+                uroj = Double.parseDouble(substring[1]);
+            }
+        }
+        else if (input.replaceFirst("-", "").contains("-")) { // formy x-y
+            String[] substring = input.replaceFirst("-", "").split("-");
+            String updatedSubstring = "-" + substring[0];
+            if (substring.length != 2) {
+                throw new InvalidInputException("Nie udało się podzielić danych wejściowych na dwie liczby.");
+            }
+            else {
+                rzecz = Double.parseDouble(updatedSubstring);
+                uroj = Double.parseDouble("-" + substring[1]);
+            }
+        }
+        else {
+            throw new InvalidInputException("Podane dane wejściowe nie spełniają warunków liczby zespolonej.");
+        }
+        return new ComplexNumber(rzecz, uroj);
+    }
     /**
      * Metoda obliczająca moduł liczby zespolonej.
      * @return moduł liczby zespolonej
@@ -119,15 +175,19 @@ public class ComplexNumber extends Vector2D {
         }
         double mianownik = Math.pow(n2.getX(), 2) + Math.pow(n2.getY(), 2);
         return new ComplexNumber ((n1.getX() * n2.getX() + n1.getY() * n2.getY()) / mianownik,
-                                  (n1.getY() * n2.getX() - n1.getX() * n2.getY()) / mianownik);
+                (n1.getY() * n2.getX() - n1.getX() * n2.getY()) / mianownik);
     }
 
     /**
      * Metoda obliczająca daną potęgę danej instancji liczby zespolonej.
      * @param p wykładnik
      * @return nowa liczba zespolona będąca wynikiem potęgowania innej
+     * @throws IllegalArgumentException gdy wykładnik = 0 i moduł = 0
      */
     public ComplexNumber potegowanie (double p) {
+        if (p == 0 && modul() == 0) {
+            throw new IllegalArgumentException("Podstawa i wykładnik nie mogą być równocześnie zerem.");
+        }
         double modul = Math.pow(modul(), p);
         double rzecz = modul * Math.cos(p * argument());
         double uroj = modul * Math.sin(p * argument());
@@ -139,8 +199,12 @@ public class ComplexNumber extends Vector2D {
      * @param n liczba zespolona
      * @param p wykładnik
      * @return nowa liczba zespolona będąca wynikiem potęgowania innej
+     * @throws IllegalArgumentException gdy wykładnik = 0 i moduł = 0
      */
     public static ComplexNumber potegowanieStat (ComplexNumber n, double p) {
+        if (p == 0 && n.modul() == 0) {
+            throw new IllegalArgumentException("Podstawa i wykładnik nie mogą być równocześnie zerem.");
+        }
         double modul = Math.pow(n.modul(), p);
         double rzecz = modul * Math.cos(p * n.argument());
         double uroj = modul * Math.sin(p * n.argument());
