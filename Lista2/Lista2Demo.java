@@ -60,5 +60,12 @@ public class Lista2Demo {
         }
         System.out.println("Reprezentacja biegunowa:");
         System.out.println(n1.repBieg());
+        System.out.println("Sprawdzenie, czy dane podane przez użytkownika reprezentują liczbę zespoloną:");
+        try {
+            ComplexNumber n5 = ComplexNumber.Input();
+            System.out.println(n5);
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
