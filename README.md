@@ -14,9 +14,9 @@
 ## Laboratorium 2
   Vector2D.java - klasa reprezentująca wektory na płaszczyźnie; pozwala wykonywać podstawowe działania matematyczne na tych obiektach
 
-  ComplexNumber.java - klasa podrzędna klasy Vector2D; pozwala wykonywać podstawowe działania matematyczne na wektorach w przestrzeni zespolonej
+  ComplexNumber.java - klasa podrzędna klasy Vector2D; pozwala wykonywać podstawowe działania matematyczne na wektorach w przestrzeni zespolonej - została zmodyfikowana na potrzeby Listy 4
 
-  Lista2Demo.java - program pozwalający na analizę i testy związane z klasami Vector2D oraz ComplexNumber
+  Lista2Demo.java - program pozwalający na analizę i testy związane z klasami Vector2D oraz ComplexNumber - został zmodyfikowany na potrzeby Listy 4
 ## Laboratorium 3
   Produkt.java - interfejs reprezentujący podstawowe własności produktów konsumenckich
 
@@ -31,3 +31,7 @@
   Magazyn.java - program tworzący i operujący na liście obiektów, które implementują interfejs Produkt/klasę abstrakcyjną AbstractProdukt
 
   Lista3Demo.java - Program sprawdzający działanie klas implementujących interfejs Produkt/klasę abstrakcyjną AbstractProdukt
+## Laboratorium 4
+  InvalidInputException.java - klasa obsługująca wyjątek związany z błędnym inputem użytkownika
+
+  ComplexNumberTest.java - klasa testująca metody klasy ComplexNumber
