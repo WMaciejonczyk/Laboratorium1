@@ -29,11 +29,11 @@ public class Magazyn {
      * @param p produkt
      */
     public void dodajProdukt(Produkt p) {
-        if (produkty.isEmpty()) {
-            produkty.put(1, p);
+        if (getProdukty().isEmpty()) {
+            getProdukty().put(1, p);
         } else {
-            int key = produkty.lastKey();
-            produkty.put(key + 1, p);
+            int key = getProdukty().lastKey();
+            getProdukty().put(key + 1, p);
         }
     }
 
@@ -42,7 +42,7 @@ public class Magazyn {
      * @param key klucz produktu
      */
     public void usunProdukt(int key) {
-        produkty.remove(key);
+        getProdukty().remove(key);
     }
 
     /**
@@ -50,12 +50,12 @@ public class Magazyn {
      * @throws IllegalArgumentException gdy mapa jest pusta
      */
     public void wyswietlZawartosc() {
-        if (produkty.isEmpty()) {
+        if (getProdukty().isEmpty()) {
             throw new IllegalArgumentException("Magazyn jest pusty");
         }
         else {
             TreeMap<Integer, String> magazyn = new TreeMap<>();
-            produkty.forEach((key, value1) -> {
+            getProdukty().forEach((key, value1) -> {
                 String value = value1.pobierzNazwe();
                 magazyn.put(key, value);
             });
