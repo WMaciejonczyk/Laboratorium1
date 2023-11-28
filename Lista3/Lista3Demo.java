@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 /**
- * Program sprawdzający działanie klas implementujących interfejs Produkt/klasę abstrakcyjną AbstractProdukt <p>
+ * Program sprawdzający działanie klas implementujących interfejs Produkt <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Lista3Demo {
@@ -32,8 +32,10 @@ public class Lista3Demo {
             magazyn.dodajProdukt(but);
             magazyn.dodajProdukt(rezystor);
             magazyn.dodajProdukt(jedzenie);
+            System.out.println("Mapa produktów w magazynie:");
             magazyn.wyswietlZawartosc();
-            magazyn.usunProdukt(rezystor);
+            magazyn.usunProdukt(2);
+            System.out.println("Mapa produktów w magazynie po modyfikacji:");
             magazyn.wyswietlZawartosc();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
