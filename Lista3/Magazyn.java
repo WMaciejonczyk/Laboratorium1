@@ -1,10 +1,11 @@
-import java.util.ArrayList;
+import java.util.TreeMap;
+
 /**
- * Klasa tworząca i operująca na liście obiektów, które implementują klasę abstrakcyjną AbstractProdukt. <p>
+ * Klasa tworząca i operująca na mapie obiektów, które implementują interfejs Produkt. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Magazyn {
-    private ArrayList<AbstractProdukt> produkty = new ArrayList<>();
+    private TreeMap<Integer, Produkt> produkty = new TreeMap<>();
 
     /**
      * Konstruktor domyślny klasy Magazyn
@@ -12,48 +13,53 @@ public class Magazyn {
     public Magazyn() {}
 
     /**
-     * Metoda ustawiająca nową listę produktów
-     * @param produkty nowa lista produktów
+     * Metoda ustawiająca nową mapę produktów
+     * @param produkty nowa mapa produktów
      */
-    public void setProdukty(ArrayList<AbstractProdukt> produkty) {
+    public void setProdukty(TreeMap<Integer, Produkt> produkty) {
         this.produkty = produkty;
     }
 
-    /**
-     * Metoda dodająca do listy dany produkt
-     * @param p produkt
-     */
-    public void dodajProdukt(AbstractProdukt p) {
-        produkty.add(p);
+    public TreeMap<Integer, Produkt> getProdukty() {
+        return produkty;
     }
 
     /**
-     * Metoda usuwająca z listy dany produkt
+     * Metoda dodająca do mapy nowy produkt
      * @param p produkt
      */
-    public void usunProdukt(AbstractProdukt p) {
-        produkty.remove(p);
+    public void dodajProdukt(Produkt p) {
+        if (produkty.isEmpty()) {
+            produkty.put(1, p);
+        } else {
+            int key = produkty.lastKey();
+            produkty.put(key + 1, p);
+        }
     }
 
     /**
-     * Metoda pozwalająca wyświetlić zawartość listy produktów
-     * @throws IllegalArgumentException gdy lista jest pusta
+     * Metoda usuwająca z mapy produkt o podanym kluczu
+     * @param key klucz produktu
+     */
+    public void usunProdukt(int key) {
+        produkty.remove(key);
+    }
+
+    /**
+     * Metoda pozwalająca wyświetlić mapę produktów
+     * @throws IllegalArgumentException gdy mapa jest pusta
      */
     public void wyswietlZawartosc() {
-        if (produkty.size() == 0) {
-            throw new IllegalArgumentException("Lista produktów jest pusta");
+        if (produkty.isEmpty()) {
+            throw new IllegalArgumentException("Magazyn jest pusty");
         }
         else {
-            System.out.print("[");
-            for (int i = 0; i < produkty.size(); i++) {
-                if (i != produkty.size() - 1) {
-                    System.out.print(produkty.get(i).pobierzNazwe() + ", ");
-                }
-                else {
-                    System.out.print(produkty.get(i).pobierzNazwe());
-                }
-            }
-            System.out.println("]");
+            TreeMap<Integer, String> magazyn = new TreeMap<>();
+            produkty.forEach((key, value1) -> {
+                String value = value1.pobierzNazwe();
+                magazyn.put(key, value);
+            });
+            System.out.println(magazyn);
         }
     }
 }
