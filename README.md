@@ -28,9 +28,9 @@
 
   Rezystor.java - program implementujący interfejs Produkt/klasę abstrakcyjną AbstractProdukt, tworzący i operujący na obiektach reprezentujących rezystory
 
-  Magazyn.java - program tworzący i operujący na liście obiektów, które implementują interfejs Produkt/klasę abstrakcyjną AbstractProdukt
+  Magazyn.java - program tworzący i operujący na liście obiektów, które implementują interfejs Produkt/klasę abstrakcyjną AbstractProdukt - został zmodyfikowany na potrzeby Listy 5
 
-  Lista3Demo.java - Program sprawdzający działanie klas implementujących interfejs Produkt/klasę abstrakcyjną AbstractProdukt
+  Lista3Demo.java - Program sprawdzający działanie klas implementujących interfejs Produkt/klasę abstrakcyjną AbstractProdukt - został zmodyfikowany na potrzeby Listy 5
 ## Laboratorium 4
   InvalidInputException.java - klasa obsługująca wyjątek związany z błędnym inputem użytkownika
 
