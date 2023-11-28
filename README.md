@@ -35,3 +35,13 @@
   InvalidInputException.java - klasa obsługująca wyjątek związany z błędnym inputem użytkownika
 
   ComplexNumberTest.java - klasa testująca metody klasy ComplexNumber
+## Laboratorium 5
+  Sets.java - klasa reprezentująca zbiory zawierające liczby całkowitel pozwala wykonywać podstawowe działania na tych obiektach
+
+  Subjects.java - klasa reprezentująca przedmioty uczelniane
+
+  University.java - klasa reprezentująca mapę zawierającą informacje o przedmiotach na uczelni; umożliwia ich dodawanie, usuwanie oraz wyświetlanie informacji na ich temat
+
+  Statistics.java - klasa przeprowadzająca statystykę zdania podanego przez użytkownika; pozwala na jego analizę pod względem całkowitej liczby słów/znaków oraz liczby ich wystąpień
+
+  Lista5Demo.java - klasa testująca działanie klas Sets, Subjects, University i Statistics
