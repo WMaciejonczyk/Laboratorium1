@@ -108,7 +108,7 @@ public class Rezystor extends AbstractProdukt { {
     public double paski() {
         double[] paski = new double[2];
         for (int i = 0; i < 2; i++) {
-            switch (kodPaskowy[i]) {
+            switch (getKodPaskowy()[i]) {
                 case "czarny" -> paski[i] = 0;
                 case "brązowy" -> paski[i] = 1;
                 case "czerwony" -> paski[i] = 2;
@@ -131,7 +131,7 @@ public class Rezystor extends AbstractProdukt { {
      * @throws IllegalArgumentException gdy podano błędny kolor
      */
     public double mnoznik() {
-        double mnoznik = switch (kodPaskowy[2]) {
+        double mnoznik = switch (getKodPaskowy()[2]) {
             case "czarny" -> 1.0;
             case "brązowy" -> 10.0;
             case "czerwony" -> 100.0;
@@ -153,7 +153,7 @@ public class Rezystor extends AbstractProdukt { {
      * @throws IllegalArgumentException gdy podano blędny kolor
      */
     public double tolerancja() {
-        double tolerancja = switch (kodPaskowy[3]) {
+        double tolerancja = switch (getKodPaskowy()[3]) {
             case "brązowy" -> 1;
             case "czerwony" -> 2;
             case "zielony" -> 0.5;
@@ -186,6 +186,6 @@ public class Rezystor extends AbstractProdukt { {
             rezystancja = paski() * mnoznik();
             jednostka = "";
         }
-        return "Rezystancja: " + rezystancja + " " +  jednostka + "Ω;" + " Tolerancja: " + "±" + tolerancja() + "%";
+        return "Rezystancja: " + rezystancja + " " +  jednostka + "Ω" + " Tolerancja: " + "±" + tolerancja() + "%";
     }
 }
