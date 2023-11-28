@@ -137,11 +137,11 @@ public class Buty extends AbstractProdukt {
      * @return rozmiar buta w standardzie US (w zależności od dedykowanej płci)
      */
     public double konwersjaUS() {
-        if (plec.equals("M")) {
-            return rozmiarUK + 0.5;
+        if (getPlec().equals("M")) {
+            return getRozmiarUK() + 0.5;
         }
         else {
-            return rozmiarUK + 1.0;
+            return getRozmiarUK() + 1.0;
         }
     }
 
@@ -150,7 +150,7 @@ public class Buty extends AbstractProdukt {
      * @return rozmiar buta w standardzie EU
      */
     public double konwersjaEU() {
-        double licznik = rozmiarUK / 0.5 - 7.0;
+        double licznik = getRozmiarUK() / 0.5 - 7.0;
         return Math.round((36.0 + (2.0 / 3.0 * licznik)) * 100.0) / 100.0;
     }
 }
