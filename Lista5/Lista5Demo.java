@@ -35,28 +35,39 @@ public class Lista5Demo {
         System.out.println("Czy dane zbiory (A i B) są równe?: " + s.areEqual());
         System.out.println("Czy dane zbiory (A i C) są równe?: " + ss.areEqual());
         // Klasy Subjects i Univeristy
-        Subjects s1 = new Subjects("FZP001064C", "Fizyka 1.3A", 2, 30, "pass");
-        Subjects s2 = new Subjects("FZP001064W", "Fizyka 1.3A", 5, 45, "exam");
+        Subjects s1 = new Subjects("FZP001064C", "Fizyka 1.3A", 2, 30, Subjects.CompletionType.PASS);
+        Subjects s2 = new Subjects("FZP001064W", "Fizyka 1.3A", 5, 45, Subjects.CompletionType.EXAM);
+        Subjects s3 = new Subjects("FTP002001W", "Optyka inżynierska", 2, 30, Subjects.CompletionType.EXAM);
+        Subjects s4 = new Subjects("MDP001000P", "Anatomia", 3, 60, Subjects.CompletionType.EXAM);
+        Subjects s5 = new Subjects("INP001030L", "Pakiety obliczeniowe", 2, 30, Subjects.CompletionType.PASS);
+        s1.setCourseCode("FZP001064D");
         University uni = new University();
         uni.addSubject(s1);
         uni.addSubject(s2);
+        uni.addSubject(s3);
+        uni.addSubject(s4);
+        uni.addSubject(s5);
         System.out.println("Mapa przedmiotów uczelni:");
         uni.displayInfoAll();
         System.out.println("Informacje na temat zadanego przedmiotu:");
-        uni.displaySubjectInfo("FZP001064C");
-        uni.deleteSubject("FZP001064C");
+        uni.displaySubjectInfo("FZP001064D");
+        uni.deleteSubject("FZP001064D");
         try {
-            uni.displaySubjectInfo("FZP001064C");
+            uni.displaySubjectInfo("FZP001064D");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+        int[] results = uni.getResultsAboutHoursAndECTS("lab");
+        System.out.println("Liczba godzin danego typu zajęć: " + results[0]);
+        System.out.println("Liczba godzin zajęć kończących się egzaminem: " + results[1]);
+        System.out.println("Suma punktów ECTS zajęć kończących się egzaminem: " + results[2]);
         // Klasa Statistics
         System.out.println("Podaj zdanie do analizy:");
         Scanner sc = new Scanner(System.in);
         String sentence = sc.nextLine();
         Statistics stat = new Statistics(sentence);
-        stat.analyzeWords();
-        stat.analyzeCharacters();
+        stat.analyzeWords(true, "nie");
+        stat.analyzeCharacters(true, 'M');
         System.out.println("Liczba wystąpień poszczególnych słów: " + stat.getWordOccurrences());
         System.out.println("Liczba wystąpień poszczególnych znaków: " + stat.getCharOccurrences());
         System.out.println("Całkowita liczba słów: " + stat.getTotalWords());
