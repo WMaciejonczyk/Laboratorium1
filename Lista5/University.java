@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -64,9 +65,10 @@ public class University {
                 String subCode = "Kod: " + subInfo.getCourseCode() + "\n";
                 String subName = "Nazwa: " + subInfo.getCourseName() + "\n";
                 String subECTS = "Punkty ECTS: " + subInfo.getECTS() + "\n";
-                String subHours = "Tygodniowa liczba godzin: " + subInfo.getWeeklyHours() + "\n";
-                String subForm = "Forma zaliczenia: " + subInfo.getCompletionForm() + "\n";
-                String info = subCode + subName + subECTS + subHours + subForm;
+                String subHours = "Tygodniowa liczba godzin: " + subInfo.getHours() + "\n";
+                String subType = "Typ zajęć: " + subInfo.getCourseType().name() + "\n";
+                String subForm = "Forma zaliczenia: " + subInfo.getCompletionForm().name() + "\n";
+                String info = subCode + subName + subECTS + subHours + subType + subForm;
                 university.put(key, info);
             });
             System.out.println(university.values());
@@ -88,14 +90,50 @@ public class University {
                 String subCode = "Kod: " + subInfo.getCourseCode() + "\n";
                 String subName = "Nazwa: " + subInfo.getCourseName() + "\n";
                 String subECTS = "Punkty ECTS: " + subInfo.getECTS() + "\n";
-                String subHours = "Tygodniowa liczba godzin: " + subInfo.getWeeklyHours() + "\n";
+                String subHours = "Tygodniowa liczba godzin: " + subInfo.getHours() + "\n";
+                String subType = "Typ zajęć: " + subInfo.getCourseType().name() + "\n";
                 String subForm = "Forma zaliczenia: " + subInfo.getCompletionForm() + "\n";
-                String info = subCode + subName + subECTS + subHours + subForm;
+                String info = subCode + subName + subECTS + subHours + subType + subForm;
                 System.out.println(info);
             }
         }
         else {
             throw new IllegalArgumentException("Podany przedmiot nie istnieje.");
+        }
+    }
+    /**
+     * Metoda podliczająca całkowitą liczbę godzin danego typu zajęć oraz liczbę godzin i sumę punktów ECTS zajęć kończących się egzaminem
+     * @param courseTypeName nazwa typu zajęć do podliczenia godzin
+     * @return tablica zawierająca liczbę godzin dla danego typu zajęć oraz liczbę godzin i sumę punktów ECTS zajęć kończących się egzaminem
+     * @throws IllegalArgumentException gdy podano błędną nazwę typu zajęć
+     */
+    public int[] getResultsAboutHoursAndECTS(String courseTypeName) {
+        String[] viable = {"LECTURE", "EXCERCISES", "LAB", "SEMINAR", "PROJECT", "THESIS", "PRACTICUM", "OTHER"};
+        boolean contains = Arrays.asList(viable).contains(courseTypeName.toUpperCase());
+        if (courseTypeName.isEmpty() || !contains) {
+            throw new IllegalArgumentException("Podano błędną nazwę typu zajęć");
+        }
+        else {
+            Subjects.CourseType courseType = Subjects.CourseType.valueOf(courseTypeName.toUpperCase());
+            int[] results = new int[3];
+            int totalHoursByCourseType = getSubjectsHashMap().values().stream()
+                    .filter(subject -> subject.getCourseType() == courseType)
+                    .mapToInt(Subjects::getHours)
+                    .sum();
+            results[0] = totalHoursByCourseType;
+
+            int totalExamHours = getSubjectsHashMap().values().stream()
+                    .filter(subject -> subject.getCompletionForm() == Subjects.CompletionType.EXAM)
+                    .mapToInt(Subjects::getHours)
+                    .sum();
+            results[1] = totalExamHours;
+
+            int totalExamECTS =getSubjectsHashMap().values().stream()
+                    .filter(subject -> subject.getCompletionForm() == Subjects.CompletionType.EXAM)
+                    .mapToInt(Subjects::getECTS)
+                    .sum();
+            results[2] = totalExamECTS;
+            return results;
         }
     }
 }
