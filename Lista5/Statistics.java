@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Klasa przeprowadzająca statystykę zdania podanego przez użytkownika. <p>
@@ -27,30 +26,74 @@ public class Statistics {
 
     /**
      * Metoda tworząca mapę odzwierciedlającą liczbę wystąpień poszczególnych słów w zdaniu podanym przez użytkownika
+     * oraz szukająca zadanego przez niego słowa
+     * @param ignoreUpperCase informacja dla programu, czy ma brać pod uwagę słowa zawierające wielką literę
+     * @param search szukane słowo w zdaniu
      */
-    public void analyzeWords() {
-        String[] words = getSentence().split("\\s+");
-
-        for (String word : words) {
-            getWordOccurrences().put(word, getWordOccurrences().getOrDefault(word, 0) + 1);
+    public void analyzeWords(boolean ignoreUpperCase, String search) {
+        String[] words = getSentence().split("\\P{L}+");
+        Optional<String> contains;
+        if (ignoreUpperCase) {
+            List<String> filteredWords = Arrays.stream(words)
+                    .filter(word -> word.equals(word.toLowerCase()))
+                    .toList();
+            for (String word : filteredWords) {
+                getWordOccurrences().put(word, getWordOccurrences().getOrDefault(word, 0) + 1);
+            }
+            for (String word : filteredWords) {
+                getWords().add(word);
+            }
+            contains = filteredWords.stream().
+                    filter(word -> word.equals(search))
+                    .findAny();
         }
-        for (String word : words) {
-            getWords().add(word);
+        else {
+            for (String word : words) {
+                getWordOccurrences().put(word, getWordOccurrences().getOrDefault(word, 0) + 1);
+            }
+            for (String word : words) {
+                getWords().add(word);
+            }
+            contains = Arrays.stream(words)
+                    .filter(word -> word.equals(search))
+                    .findAny();
         }
+        contains.ifPresentOrElse(
+                word -> System.out.println("Zdanie zawiera słowo: " + word),
+                () -> System.out.println("Nie znaleziono szukanego słowa.")
+        );
     }
 
     /**
      * Metoda tworząca mapę odzwierciedlającą liczbę wystąpień poszczególnych znaków w zdaniu podanym przez użytkownika
+     * oraz szukająca zadanego przez niego znaku
+     * @param ignoreNonLetters informacja dla programu, czy powinien ignorować znaki niebędące literami
+     * @param search poszukiwany znak w zdaniu
      */
-    public void analyzeCharacters() {
-        char[] chars = getSentence().toCharArray();
-
+    public void analyzeCharacters(boolean ignoreNonLetters, char search) {
+        char[] chars;
+        if (ignoreNonLetters) {
+            chars = getSentence().toLowerCase().replaceAll("\\P{L}", "").replaceAll("\\s", "").toCharArray();
+        }
+        else {
+            chars = getSentence().toLowerCase().toCharArray();
+        }
+        String charString = String.valueOf(chars);
+        String[] stringChars = charString.split("");
+        Optional<String> contains;
         for (char character : chars) {
             getCharOccurrences().put(character, getCharOccurrences().getOrDefault(character, 0) + 1);
         }
         for (char character : chars) {
             getCharacters().add(character);
         }
+        contains = Arrays.stream(stringChars)
+                .filter(word -> word.equals(String.valueOf(search)))
+                .findAny();
+        contains.ifPresentOrElse(
+                character -> System.out.println("Zdanie zawiera znak: " + character),
+                () -> System.out.println("Nie znaleziono szukanego znaku.")
+        );
     }
 
     /**
@@ -90,7 +133,7 @@ public class Statistics {
      * @return liczba słów
      */
     public int getTotalWords() {
-        return getSentence().split("\\s+").length;
+        return getWords().size();
     }
 
     /**
@@ -98,7 +141,7 @@ public class Statistics {
      * @return liczba znaków
      */
     public int getTotalCharacters() {
-        return getSentence().length();
+        return getCharacters().size();
     }
 
     /**
