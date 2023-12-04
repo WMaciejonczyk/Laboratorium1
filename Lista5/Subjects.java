@@ -1,38 +1,87 @@
 /**
- * Klasa tworząca obiekty reprezentujące predmioty uczelniane. <p>
+ * Klasa tworząca obiekty reprezentujące przedmioty uczelniane. <p>
  * Autor: Wojciech Maciejończyk 268337
  */
 public class Subjects {
+    public enum CourseType {
+        LECTURE,
+        EXCERCISES,
+        LAB,
+        SEMINAR,
+        PROJECT,
+        THESIS,
+        PRACTICUM,
+        OTHER
+    }
+
+    public enum CompletionType {
+        EXAM,
+        PASS
+    }
     private String courseCode;
     private String courseName;
     private int ECTS;
-    private int weeklyHours;
-    private String completionForm;
+    private int hours;
+    private CourseType courseType;
+    private CompletionType completionForm;
 
     /**
      * Konstruktor przyjmujący pięć parametrów
      * @param courseCode kod przedmiotu
      * @param courseName nazwa przedmiotu
      * @param ECTS liczba punktów ECTS
-     * @param weeklyHours tygodniowa liczba godzin przedmiotu
+     * @param hours wymiar godzinowy przedmiotu
      * @param completionForm forma zaliczenia przedmiotu
-     * @throws IllegalArgumentException gdy kod, nazwa lub forma zaliczenia są puste lub ECTS < 0 lub weeklyHours <= 0
-     * lub formą zaliczenia nie jest ani "pass" ani "exam" lub ostatnim znakiem w kodzie nie jest litera W/C/L
+     * @throws IllegalArgumentException gdy kod, nazwa lub forma zaliczenia są puste lub ECTS < 0 lub hours <= 0
+     * lub formą zaliczenia nie jest ani "pass", ani "exam" lub gdy kod nie odpowiada żadnemu typowi zajęć
      */
-    public Subjects(String courseCode, String courseName, int ECTS, int weeklyHours, String completionForm) {
-        if (courseCode.isEmpty() || courseName.isEmpty() || ECTS < 0 || weeklyHours <= 0 || completionForm.isEmpty()
-            || (!completionForm.equalsIgnoreCase("exam") && !completionForm.equalsIgnoreCase("pass"))
-            || (courseCode.toUpperCase().charAt(courseCode.length()-1) != 'W'
-                && courseCode.toUpperCase().charAt(courseCode.length()-1) != 'C'
-                && courseCode.toUpperCase().charAt(courseCode.length()-1) != 'L')) {
-            throw new IllegalArgumentException("Informacje przedmiotu są niepoprawne.");
+    public Subjects(String courseCode, String courseName, int ECTS, int hours, CompletionType completionForm) {
+        if (courseCode.isEmpty()) {
+            throw new IllegalArgumentException("Podany kod przedmiotu jest pusty.");
         }
         else {
-            this.courseCode = courseCode.toUpperCase();
-            this.courseName = courseName;
-            this.ECTS = ECTS;
-            this.weeklyHours = weeklyHours;
-            this.completionForm = completionForm.toLowerCase();
+            char c = courseCode.toUpperCase().charAt(courseCode.length()-1);
+            char[] viable = {'W', 'C', 'L', 'S', 'P', 'D', 'Q', 'K'};
+            boolean contains = new String(viable).contains(String.valueOf(c));
+            if (courseName.isEmpty() || ECTS < 0 || hours <= 0 || !contains
+                    || (!completionForm.name().equalsIgnoreCase("exam") && !completionForm.name().equalsIgnoreCase("pass"))) {
+                throw new IllegalArgumentException("Informacje przedmiotu są niepoprawne.");
+            }
+            else {
+                this.courseCode = courseCode.toUpperCase();
+                this.courseName = courseName;
+                this.ECTS = ECTS;
+                this.hours = hours;
+                this.completionForm = completionForm;
+                setCourseTypeFromCourseCode();
+            }
+        }
+    }
+
+    /**
+     * Metoda pozwalająca na ustalenie typu zajęć na podstawie kodu przedmiotu
+     * @throws IllegalArgumentException gdy kod przedmiotu nie odpowiada żadnemu typowi zajęć
+     */
+    private void setCourseTypeFromCourseCode() {
+        char lastChar = courseCode.charAt(courseCode.length() - 1);
+
+        switch (lastChar) {
+            case 'W' -> this.courseType = CourseType.LECTURE;
+            case 'C' -> this.courseType = CourseType.EXCERCISES;
+            case 'L' -> this.courseType = CourseType.LAB;
+            case 'S' -> this.courseType = CourseType.SEMINAR;
+            case 'P' -> this.courseType = CourseType.PROJECT;
+            case 'D' -> this.courseType = CourseType.THESIS;
+            case 'Q' -> this.courseType = CourseType.PRACTICUM;
+            case 'K' -> {
+                char secondLastChar = courseCode.charAt(courseCode.length() - 2);
+                if (secondLastChar == 'B') {
+                    this.courseType = CourseType.OTHER;
+                } else {
+                    throw new IllegalArgumentException("Błędny kod przedmiotu.");
+                }
+            }
+            default -> throw new IllegalArgumentException("Błędny kod przedmiotu.");
         }
     }
 
@@ -55,11 +104,14 @@ public class Subjects {
         }
         else {
             char c = courseCode.toUpperCase().charAt(courseCode.length()-1);
-            if (c != 'W' && c != 'C' && c != 'L') {
+            char[] viable = {'W', 'C', 'L', 'S', 'P', 'D', 'Q'};
+            boolean contains = new String(viable).contains(String.valueOf(c));
+            if (!contains) {
                 throw new IllegalArgumentException("Podano niepoprawny kod przedmiotu.");
             }
             else {
                 this.courseCode = courseCode;
+                setCourseType();
             }
         }
     }
@@ -109,32 +161,47 @@ public class Subjects {
     }
 
     /**
-     * Metoda zwracająca tygodniową liczbę godzin przedmiotu
-     * @return tygodniowa liczba godzin przedmiotu
+     * Metoda zwracająca wymiar godzinowy przedmiotu
+     * @return wymiar godzinowy przedmiotu
      */
-    public int getWeeklyHours() {
-        return weeklyHours;
+    public int getHours() {
+        return hours;
     }
 
     /**
-     * Metoda ustawiająca nową tygodniową liczbę godzin przedmiotu
-     * @param weeklyHours nowa tygodniowa liczba godzin przedmiotu
-     * @throws IllegalArgumentException gdy weeklyHours <= 0
+     * Metoda ustawiająca nowy wymiar godzinowy przedmiotu
+     * @param hours nowy wymiar godzinowy przedmiotu
+     * @throws IllegalArgumentException gdy hours <= 0
      */
-    public void setWeeklyHours(int weeklyHours) {
-        if (weeklyHours <= 0) {
+    public void setHours(int hours) {
+        if (hours <= 0) {
             throw new IllegalArgumentException("Podana liczba jest mniejsza lub równa 0.");
         }
         else {
-            this.weeklyHours = weeklyHours;
+            this.hours = hours;
         }
+    }
+
+    /**
+     * Metoda zwracająca typ zajęć przedmiotu
+     * @return typ zajęć
+     */
+    public CourseType getCourseType() {
+        return courseType;
+    }
+
+    /**
+     * Metoda ustawiająca nowy typ zajęć przedmiotu
+     */
+    public void setCourseType() {
+        setCourseTypeFromCourseCode();
     }
 
     /**
      * Metoda zwracająca formę zaliczenia przedmiotu
      * @return forma zaliczenia przedmiotu
      */
-    public String getCompletionForm() {
+    public CompletionType getCompletionForm() {
         return completionForm;
     }
 
@@ -143,8 +210,8 @@ public class Subjects {
      * @param completionForm nowa forma zaliczenia przedmiotu
      * @throws IllegalArgumentException gdy completionForm nie oznacza ani egzaminu, ani zaliczenia
      */
-    public void setCompletionForm(String completionForm) {
-        if (!completionForm.equalsIgnoreCase("exam") && !completionForm.equalsIgnoreCase("pass")) {
+    public void setCompletionForm(CompletionType completionForm) {
+        if (!completionForm.name().equalsIgnoreCase("exam") && !completionForm.name().equalsIgnoreCase("pass")) {
             throw new IllegalArgumentException("Podano błędną formę zaliczenia.");
         }
         else {
