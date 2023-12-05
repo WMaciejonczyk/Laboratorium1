@@ -38,10 +38,10 @@
 ## Laboratorium 5
   Sets.java - klasa reprezentująca zbiory zawierające liczby całkowitel pozwala wykonywać podstawowe działania na tych obiektach
 
-  Subjects.java - klasa reprezentująca przedmioty uczelniane
+  Subjects.java - klasa reprezentująca przedmioty uczelniane - została zmodyfikowana na potrzeby Listy 6
 
-  University.java - klasa reprezentująca mapę zawierającą informacje o przedmiotach na uczelni; umożliwia ich dodawanie, usuwanie oraz wyświetlanie informacji na ich temat
+  University.java - klasa reprezentująca mapę zawierającą informacje o przedmiotach na uczelni; umożliwia ich dodawanie, usuwanie oraz wyświetlanie informacji na ich temat - została zmodyfikowana na potrzeby Listy 6
 
-  Statistics.java - klasa przeprowadzająca statystykę zdania podanego przez użytkownika; pozwala na jego analizę pod względem całkowitej liczby słów/znaków oraz liczby ich wystąpień
+  Statistics.java - klasa przeprowadzająca statystykę zdania podanego przez użytkownika; pozwala na jego filtrację i analizę pod względem całkowitej liczby słów/znaków oraz liczby ich wystąpień - została zmodyfikowana na potrzeby Listy 6
 
-  Lista5Demo.java - klasa testująca działanie klas Sets, Subjects, University i Statistics
+  Lista5Demo.java - klasa testująca działanie klas Sets, Subjects, University i Statistics - została zmodyfikowana na potrzeby Listy 6
