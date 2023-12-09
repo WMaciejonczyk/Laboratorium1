@@ -14,9 +14,9 @@
 ## Laboratorium 2
   Vector2D.java - klasa reprezentująca wektory na płaszczyźnie; pozwala wykonywać podstawowe działania matematyczne na tych obiektach
 
-  ComplexNumber.java - klasa podrzędna klasy Vector2D; pozwala wykonywać podstawowe działania matematyczne na wektorach w przestrzeni zespolonej - została zmodyfikowana na potrzeby Listy 4
+  ComplexNumber.java - klasa podrzędna klasy Vector2D; pozwala wykonywać podstawowe działania matematyczne na wektorach w przestrzeni zespolonej - została zmodyfikowana na potrzeby Listy 4   i Listy 7
 
-  Lista2Demo.java - program pozwalający na analizę i testy związane z klasami Vector2D oraz ComplexNumber - został zmodyfikowany na potrzeby Listy 4
+  Lista2Demo.java - program pozwalający na analizę i testy związane z klasami Vector2D oraz ComplexNumber - został zmodyfikowany na potrzeby Listy 4 i Listy 7
 ## Laboratorium 3
   Produkt.java - interfejs reprezentujący podstawowe własności produktów konsumenckich
 
@@ -40,8 +40,8 @@
 
   Subjects.java - klasa reprezentująca przedmioty uczelniane - została zmodyfikowana na potrzeby Listy 6
 
-  University.java - klasa reprezentująca mapę zawierającą informacje o przedmiotach na uczelni; umożliwia ich dodawanie, usuwanie oraz wyświetlanie informacji na ich temat - została zmodyfikowana na potrzeby Listy 6
+  University.java - klasa reprezentująca mapę zawierającą informacje o przedmiotach na uczelni; umożliwia ich dodawanie, usuwanie oraz wyświetlanie informacji na ich temat - została zmodyfikowana na potrzeby Listy 6 i Listy 7
 
   Statistics.java - klasa przeprowadzająca statystykę zdania podanego przez użytkownika; pozwala na jego filtrację i analizę pod względem całkowitej liczby słów/znaków oraz liczby ich wystąpień - została zmodyfikowana na potrzeby Listy 6
 
-  Lista5Demo.java - klasa testująca działanie klas Sets, Subjects, University i Statistics - została zmodyfikowana na potrzeby Listy 6
+  Lista5Demo.java - klasa testująca działanie klas Sets, Subjects, University i Statistics - została zmodyfikowana na potrzeby Listy 6 i Listy 7
