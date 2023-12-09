@@ -1,5 +1,8 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
+import org.json.simple.*;
+import org.json.simple.parser.*;
 
 /**
  * Klasa tworząca i operująca na mapie zawierającej informacje o przedmiotach na uczelni. <p>
@@ -134,6 +137,58 @@ public class University {
                     .sum();
             results[2] = totalExamECTS;
             return results;
+        }
+    }
+
+    /**
+     * Metoda eksportująca dane o przedmiotach do pliku o formacie JSON
+     * @param fileName nazwa pliku JSON
+     */
+    public void JSONFileExport (String fileName) {
+        JSONArray subjectsArray = new JSONArray();
+
+        for (Subjects subject : getSubjectsHashMap().values()) {
+            JSONObject subjectObject = new JSONObject();
+            subjectObject.put("kod", subject.getCourseCode());
+            subjectObject.put("nazwa", subject.getCourseName());
+            subjectObject.put("ECTS", subject.getECTS());
+            subjectObject.put("typ zajęć", subject.getCourseType().name());
+            subjectObject.put("forma zaliczenia", subject.getCompletionForm().name());
+            subjectObject.put("liczba godzin", subject.getHours());
+
+            subjectsArray.add(subjectObject);
+        }
+        try (FileWriter fileWriter = new FileWriter(fileName)) {
+            fileWriter.write(subjectsArray.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Metoda importująca dane o przedmiotach z pliku o formacie JSON
+     * @param filePath ścieżka do pliku
+     */
+    public void JSONFileImport (String filePath) {
+        JSONParser parser = new JSONParser();
+        try (FileReader fileReader = new FileReader(filePath)) {
+            Object obj = parser.parse(fileReader);
+            JSONArray subjectsArray = (JSONArray) obj;
+
+            for (Object object : subjectsArray) {
+                JSONObject jsonObject = (JSONObject) object;
+
+                String courseCode = (String) jsonObject.get("kod");
+                String courseName = (String) jsonObject.get("nazwa");
+                int ECTS = Math.toIntExact((Long) jsonObject.get("ECTS"));
+                int hours = Math.toIntExact((Long) jsonObject.get("liczba godzin"));
+                Subjects.CompletionType completionType = Subjects.CompletionType.valueOf((String) jsonObject.get("forma zaliczenia"));
+
+                Subjects subject = new Subjects(courseCode, courseName, ECTS, hours, completionType);
+                addSubject(subject);
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
     }
 }
