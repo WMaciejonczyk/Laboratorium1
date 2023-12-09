@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  * Program sprawdzający działanie klasy nadrzędnej Vector2D i jej klasy podrzędnej ComplexNumber <p>
  * Autor: Wojciech Maciejończyk 268337
@@ -67,5 +68,7 @@ public class Lista2Demo {
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
         }
+        ArrayList<String> data = ComplexNumber.readComplexData("C:\\Users\\macie\\IdeaProjects\\Lista2\\data.dat");
+        ComplexNumber.writeToFile(data, true);
     }
 }
