@@ -1,4 +1,8 @@
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static java.lang.Math.round;
 
 /**
  * Klasa podrzędna tworząca i operująca na obiektach reprezentujących wektory zespolone na płaszczyźnie. <p>
@@ -216,7 +220,7 @@ public class ComplexNumber extends Vector2D {
      * @return reprezentacja biegunowa po zaokrągleniu do dwóch miejsc po przecinku
      */
     public String repBieg () {
-        return "z = (" + Math.round(modul() * 100.0) / 100.0 + ", " + Math.round(argument() * 100.0) / 100.0 + ")";
+        return "z = (" + round(modul() * 100.0) / 100.0 + ", " + round(argument() * 100.0) / 100.0 + ")";
     }
 
     /**
@@ -241,13 +245,68 @@ public class ComplexNumber extends Vector2D {
         String exp;
         String kan;
         if (y < 0) {
-            exp = Math.round(modul() * 100.0) / 100.0 + "exp(-i" + (-Math.round(argument() * 100.0) / 100.0) + ")";
-            kan = "z = " + Math.round(x * 100.0) / 100.0 + " - i" + Math.round(-y * 100.0) / 100.0;
+            exp = round(modul() * 100.0) / 100.0 + "exp(-i" + (-round(argument() * 100.0) / 100.0) + ")";
+            kan = "z = " + round(x * 100.0) / 100.0 + " - i" + round(-y * 100.0) / 100.0;
         }
         else {
-            exp = Math.round(modul() * 100.0) / 100.0 + "exp(i" + Math.round(argument() * 100.0) / 100.0 + ")";
-            kan = "z = " + Math.round(x * 100.0) / 100.0 + " + i" + Math.round(y * 100.0) / 100.0;
+            exp = round(modul() * 100.0) / 100.0 + "exp(i" + round(argument() * 100.0) / 100.0 + ")";
+            kan = "z = " + round(x * 100.0) / 100.0 + " + i" + round(y * 100.0) / 100.0;
         }
         return exp + "\n" + kan;
+    }
+
+    /**
+     * Metoda odpowiedzialna za odczytywanie danych z pliku i zwracająca tablicę, która je zawiera
+     * @param fileDirectory ścieżka pliku
+     * @return tablica z danymi związanymi z liczbami zespolonymi
+     */
+    public static ArrayList<String> readComplexData(String fileDirectory) {
+        ArrayList<String> array = new ArrayList<>();
+        File myFile = new File(fileDirectory);
+        try (BufferedReader br = new BufferedReader(new FileReader(myFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.startsWith("#")) {
+                    String[] fragments = line.split("[\\s, +]");
+                    String t;
+                    double Re;
+                    double Im;
+                    double mod;
+                    double arg;
+                    if (fragments.length == 3) {
+                        t = fragments[0];
+                        Re = Double.parseDouble(fragments[1]);
+                        Im = Double.parseDouble(fragments[2].replaceAll("i", ""));
+                        ComplexNumber number = new ComplexNumber(Re, Im);
+                        mod = round(number.modul() * 100000.0) / 100000.0;
+                        arg = round(number.argument() * 100000.0) / 100000.0;
+                        array.add(t);
+                        array.add(String.valueOf(mod));
+                        array.add(String.valueOf(arg));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return array;
+    }
+
+    /**
+     * Metoda wpisująca do pliku dane związane z liczbami zespolonymi
+     * @param data dane do wpisania
+     * @param overwrite decyzja, czy dopisać dane do już istniejącego pliku, czy nadpisać go
+     */
+    public static void writeToFile(ArrayList<String> data, boolean overwrite) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("out_data.out", !overwrite))) {
+            bw.write("# t mod arg");
+            bw.newLine();
+            for (int i = 0; i < data.size(); i += 3) {
+                bw.write(data.get(i) + " " + data.get(i + 1) + " " + data.get(i + 2));
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
