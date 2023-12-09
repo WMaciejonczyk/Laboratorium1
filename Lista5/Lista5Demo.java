@@ -61,6 +61,11 @@ public class Lista5Demo {
         System.out.println("Liczba godzin danego typu zajęć: " + results[0]);
         System.out.println("Liczba godzin zajęć kończących się egzaminem: " + results[1]);
         System.out.println("Suma punktów ECTS zajęć kończących się egzaminem: " + results[2]);
+        University uni2 = new University();
+        uni.JSONFileExport("subjects.json");
+        uni2.JSONFileImport("C:\\Users\\macie\\IdeaProjects\\Lista7\\subjects.json");
+        System.out.println("Mapa przedmiotów uczelni zaimportowanych z pliku JSON:");
+        uni2.displayInfoAll();
         // Klasa Statistics
         System.out.println("Podaj zdanie do analizy:");
         Scanner sc = new Scanner(System.in);
