@@ -45,3 +45,15 @@
   Statistics.java - klasa przeprowadzająca statystykę zdania podanego przez użytkownika; pozwala na jego filtrację i analizę pod względem całkowitej liczby słów/znaków oraz liczby ich wystąpień - została zmodyfikowana na potrzeby Listy 6
 
   Lista5Demo.java - klasa testująca działanie klas Sets, Subjects, University i Statistics - została zmodyfikowana na potrzeby Listy 6 i Listy 7
+## Laboratorium 8
+  Counter.java - klasa tworząca obiekt licznika
+
+  Numbers.java - klasa implementująca interfejs Runnable do zwiększania zadanego licznika
+
+  SharedBank.java - klasa tworząca obiekty reprezentujące konta bankowe
+
+  WithdrawThread.java - klasa implementująca interfejs Runnable do wykonywania wyciągów z konta bankowego - brak synchronizacji wątków
+
+  WithdrawThreadSynchronized.java - klasa implementująca interfejs Runnable do wykonywania wyciągów z konta bankowego - zawiera synchronizację wątków
+
+  Lista8Demo.java - klasa pokazująca współbieżne działanie programu dla klas Counter, Numbers, SharedBank, WithdrawThread, WithdrawThreadSynchronized 
