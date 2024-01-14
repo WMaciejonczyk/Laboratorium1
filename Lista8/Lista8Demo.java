@@ -4,22 +4,29 @@
 public class Lista8Demo {
     /**
      * Klasa Lista8Demo
-     * @param args badane wątki wykonujące program zadany przez klasy Numbers, SharedBank, WithdrawThread, WithdrawThreadSynchronized
+     * @param args badane wątki wykonujące program zadany przez klasy Counter, Numbers, SharedBank, WithdrawThread, WithdrawThreadSynchronized
      * @throws InterruptedException gdy wątek zostaje przerwany
      */
     public static void main(String[] args) throws InterruptedException {
-        // Zadanie 1
-        Thread thread1 = new Thread(new Numbers());
-        Thread thread2 = new Thread(new Numbers());
-        Thread thread3 = new Thread(new Numbers());
+        // Zadanie 2
+        Counter c = new Counter();
+        Thread thread1 = new Thread(new Numbers(c));
+        Thread thread2 = new Thread(new Numbers(c));
+        Thread thread3 = new Thread(new Numbers(c));
+        Thread thread4 = new Thread(new Numbers(c));
+        Thread thread5 = new Thread(new Numbers(c));
         thread1.start();
         thread2.start();
         thread3.start();
+        thread4.start();
+        thread5.start();
 
         thread1.join();
         thread2.join();
         thread3.join();
-
+        thread4.join();
+        thread5.join();
+        System.out.println(c.getCount());
         System.out.println(" ");
         // Zadanie 3a
         System.out.println("Zadanie 3 - brak synchronizacji wątków");
